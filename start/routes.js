@@ -16,8 +16,20 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('sessions', 'SessionController.store')
+Route.post('sessions', 'SessionController.store').validator('Session')
+Route.post('users', 'UserController.store').validator('User')
 
 Route.group(() => {
-  Route.resource('fuels', 'FuelController').apiOnly()
+  Route.resource('fuels', 'FuelController')
+    .apiOnly()
+    .validator(
+      new Map(
+        [
+          [
+            ['fuels.store, fuels.update'],
+            ['Fuel']
+          ]
+        ]
+      )
+    )
 }).middleware('auth')
