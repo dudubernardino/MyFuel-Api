@@ -18,6 +18,9 @@ const Route = use('Route')
 
 Route.post('sessions', 'SessionController.store').validator('Session')
 
+Route.post('passwords', 'ForgotPasswordController.store')
+Route.put('passwords', 'ForgotPasswordController.update')
+
 Route.group(() => {
   Route.resource('users', 'UserController')
     .apiOnly()

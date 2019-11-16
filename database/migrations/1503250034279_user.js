@@ -10,6 +10,8 @@ class UserSchema extends Schema {
       table.string('name').notNullable()
       table.string('email').notNullable().unique()
       table.string('password').notNullable()
+      table.string('token')
+      table.timestamp('token_created_at')
       table.timestamps()
     })
   }
