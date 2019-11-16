@@ -4,8 +4,8 @@ const User = use('App/Models/User')
 const Mail = use('Mail')
 
 class UserController {
-  async index ({ auth }) {
-    const users = await User.all()
+  async index () {
+    const users = await User.query().with('fuels').fetch()
 
     return users
   }
@@ -37,7 +37,7 @@ class UserController {
 
   async show ({ params, response }) {
     try {
-      const user = await User.findByOrFail('id', params.id)
+      const user = await User.query().where('id', params.id).with('fuels').fetch()
 
       return user
     } catch (err) {

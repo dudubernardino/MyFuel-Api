@@ -14,7 +14,7 @@ class FuelController {
    * @param {View} ctx.view
    */
   async index ({ auth }) {
-    const fuels = await auth.user.fuels().fetch()
+    const fuels = await auth.user.fuels().with('user').fetch()
     return fuels
   }
 
@@ -47,7 +47,7 @@ class FuelController {
    * @param {View} ctx.view
    */
   async show ({ params, auth, reponse }) {
-    const fuel = await auth.user.fuels().where('fuels.id', params.id).first()
+    const fuel = await auth.user.fuels().where('fuels.id', params.id).with('user').fetch()
 
     return fuel
   }
