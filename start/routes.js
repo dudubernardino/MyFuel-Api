@@ -17,7 +17,31 @@
 const Route = use('Route')
 
 Route.post('sessions', 'SessionController.store').validator('Session')
-Route.post('users', 'UserController.store').validator('User')
+
+Route.group(() => {
+  Route.resource('users', 'UserController')
+    .apiOnly()
+    .validator(
+      new Map(
+        [
+          [
+            ['users.store'],
+            ['User']
+          ]
+        ]
+      )
+    )
+    .middleware(
+      new Map(
+        [
+          [
+            ['users.index', 'users.show', 'users.update', 'users.delete'],
+            ['auth']
+          ]
+        ]
+      )
+    )
+})
 
 Route.group(() => {
   Route.resource('fuels', 'FuelController')

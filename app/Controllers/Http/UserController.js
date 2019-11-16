@@ -1,16 +1,74 @@
 'use strict'
 
 const User = use('App/Models/User')
+const Mail = use('Mail')
 
 class UserController {
+  async index ({ auth }) {
+    const users = await User.all()
+
+    return users
+  }
+
   async store ({ request, response, auth }) {
-    const data = request.all()
+    try {
+      const data = request.all()
 
-    await User.create(data)
+      await User.create(data)
 
-    const token = await auth.attempt(data.email, data.password)
+      const token = await auth.attempt(data.email, data.password)
 
-    return token
+      await Mail.send(
+        ['emails.create_user'],
+        { name: data.name },
+        message => {
+          message
+            .to(data.email)
+            .from('eduardomoura.moura@gmail.com', 'Eduardo | Bernardino')
+            .subject('Cadastro no MyFuel')
+        }
+      )
+
+      return token
+    } catch (err) {
+      return response.status(err.status).send({ error: { message: 'Erro ao criar o usuário' } })
+    }
+  }
+
+  async show ({ params, response }) {
+    try {
+      const user = await User.findByOrFail('id', params.id)
+
+      return user
+    } catch (err) {
+      return response.status(err.status).send({ error: { message: 'Erro ao encontrar o usuário' } })
+    }
+  }
+
+  async update ({ request, params, response }) {
+    try {
+      const data = request.only(['name', 'password'])
+      const user = await User.findByOrFail('id', params.id)
+
+      user.merge(data)
+      user.updated_at = new Date()
+
+      user.save()
+
+      return user
+    } catch (err) {
+      return response.status(err.status).send({ error: { message: 'Erro ao editar o usuário' } })
+    }
+  }
+
+  async destroy ({ params, response }) {
+    try {
+      const user = await User.findByOrFail('id', params.id)
+
+      await user.delete()
+    } catch (err) {
+      return response.status(err.status).send({ error: { message: 'Erro ao excluir o usuário' } })
+    }
   }
 }
 

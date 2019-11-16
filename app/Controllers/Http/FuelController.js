@@ -46,7 +46,7 @@ class FuelController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, auth }) {
+  async show ({ params, auth, reponse }) {
     const fuel = await auth.user.fuels().where('fuels.id', params.id).first()
 
     return fuel
@@ -65,6 +65,7 @@ class FuelController {
     const fuel = await auth.user.fuels().where('fuels.id', params.id).first()
 
     fuel.merge(data)
+    fuel.updated_at = new Date()
 
     await fuel.save()
 
