@@ -1,7 +1,7 @@
 <div style="margin: 0 auto">
   <h1 align="center">
   <br>
-    <img src="petrol-station.png" alt="MyFuel" width="90">
+    <img src="petrol-station.png" alt="MyFuel" width="200" height="200">
   <br>
   <br>
   MyFuel
@@ -40,11 +40,10 @@ _Remember: If you restart your machine, you will need to start again the server 
 
 
 1. Clone this repo using `https://github.com/dudubernardino/MyFuel`
-2. Move to the appropriate directory: `cd backend`.<br />
-3. Run `yarn` to install dependencies.<br />
-4. Copy the `.env.example` file and rename it to `.env`.<br/>
-5. Add all the values for the environment variables.<br/>
-6. Run `yarn start` to run the servers at `http://localhost:3333`.
+2. Run `yarn` to install dependencies.<br />
+3. Copy the `.env.example` file and rename it to `.env`.<br/>
+4. Add all the values for the environment variables.<br/>
+5. Run `yarn start` to run the servers at `http://localhost:3333`.
 
 ## Docs
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0d6cd3812b1e892b7c3d)
