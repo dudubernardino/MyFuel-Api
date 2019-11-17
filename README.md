@@ -1,13 +1,13 @@
 <div style="margin: 0 auto">
   <h1 align="center">
   <br>
-    <img src="../petrol-station.png" alt="AcensJr" width="90">
+    <img src="petrol-station.png" alt="MyFuel" width="90">
   <br>
   <br>
-  GOAcens
+  MyFuel
   </h1>
 
-  <p align="center"> API for AcensJr GGE System (GOA) 🦅</p>
+  <p align="center"> An application for fuel expense control 🚗⛽</p>
 </div>
 <hr />
 
