@@ -18,6 +18,7 @@ class DatabaseSeeder {
     const user = await User.create({
       name: 'Eduardo Bernardino',
       email: 'eduardomoura.moura@gmail.com',
+      admin: true,
       password: '123456'
     })
 
