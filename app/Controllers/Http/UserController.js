@@ -13,6 +13,7 @@ class UserController {
   async store ({ request, response, auth }) {
     try {
       const data = request.all()
+      const { password, ...user } = data
 
       await User.create(data)
 
@@ -29,7 +30,10 @@ class UserController {
         }
       )
 
-      return token
+      return {
+        user,
+        token
+      }
     } catch (err) {
       return response.status(err.status).send({ error: { message: 'Erro ao criar o usuário' } })
     }
